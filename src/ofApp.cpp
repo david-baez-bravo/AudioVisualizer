@@ -12,14 +12,16 @@ void ofApp::setup() {
 void ofApp::update() {
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
-    ofSoundUpdate();               // Updates all sound players
-    visualizer.updateAmplitudes(); // Updates Amplitudes for visualizer
+    ofSoundUpdate();                    // Updates all sound players
+    if (!paused){                       // Pauses Visualizer
+        visualizer.updateAmplitudes();  // Updates Amplitudes for visualizer
+    }
     progress = sound.getPosition();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    /* The update method is called muliple times per second
+    /* The draw method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
 
     // Progress Bar
@@ -81,6 +83,9 @@ void ofApp::keyPressed(int key) {
             sound.play();
         }
         playing = !playing;
+        break;
+    case 'a':
+        paused = !paused;
         break;
     case '1':
         mode = '1';
