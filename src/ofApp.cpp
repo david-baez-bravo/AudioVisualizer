@@ -5,7 +5,6 @@ void ofApp::setup() {
     sound.load("beat.wav");           // Loads a sound file (in bin/data/)
     sound.setLoop(true);              // Makes the song loop indefinitely
     sound.setVolume(1);               // Sets the song volume
-    ofSetBackgroundColor(36, 32, 56); // Sets the Background Color
 }
 
 //--------------------------------------------------------------
@@ -48,13 +47,15 @@ void ofApp::draw() {
     // ofDrawBitmapString("Current Mouse Position: " + ofToString(cur_x) + ", " + ofToString(cur_y), 0, 30);
 }
 void ofApp::drawMode1(vector<float> amplitudes) {
+    ofSetBackgroundColor(ofColor::dodgerBlue); // Sets the Background Color
     ofFill();        // Drawn Shapes will be filled in with color
     ofSetColor(256); // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Height Visualizer", 0, 15);
-    ofSetColor(189, 45, 135);
-    ofDrawRectangle(2, ofGetHeight() - 100, 50, amplitudes[0]);
+    ofSetColor(0, 0, 200);
+    ofDrawRectRounded(2, ofGetHeight() - 100, 50, amplitudes[0], 10);
 }
 void ofApp::drawMode2(vector<float> amplitudes) {
+    ofSetBackgroundColor(ofColor::seaGreen); // Sets the Background Color
     ofSetLineWidth(5); // Sets the line width
     ofNoFill();        // Only the outline of shapes will be drawn
     ofSetColor(256);   // This resets the color of the "brush" to white
@@ -67,6 +68,7 @@ void ofApp::drawMode2(vector<float> amplitudes) {
 }
 
 void ofApp::drawMode3(vector<float> amplitudes) {
+    ofSetBackgroundColor(ofColor::fireBrick); // Sets the Background Color
     ofSetColor(256); // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Width Visualizer", 0, 15);
     // YOUR CODE HERE
