@@ -1,5 +1,5 @@
-# PA1: openFrameworks Audio Visualizer
-The objective for this first project is to complete this audiovisualizer with the help of openFrameworks!
+# Audio Visualizer
+The objective for this project is to create an audiovisualizer with the help of openFrameworks.
 
 # What it can do out of the box
 After compiling and running the project for the first time, you should be able to do a couple of things:
@@ -8,7 +8,8 @@ After compiling and running the project for the first time, you should be able t
 - Using different number keys, you can visualize the music in different ways:
     - 1: Rectangle Height Visualizer
     - 2: Circle Radius Visualizer
-    - 4: Custom Visualizer (to be implemented)
+    - 3: Curve Visualizer
+    - 4: Elipse Visualizer 
 
 # Classes
 This project contains two classes that should be of your concern: ofApp and AudioVisualizer.
@@ -19,10 +20,5 @@ This is the class that brings most things together. Here, you will find the code
 ## AudioVisualizer
 The AudioVisualizer class provides us with the data needed to do the visualization. Using some of the tools OpenFrameworks provides us and math, we can obtain information such as the amplitude of the sound. 
 
-# Student Info
-
-Please fill out the information below for each member of the team:
-
-### [David Báez Bravo] : [david.baez3@upr.edu]
-
-### [Jachikasielu Uwakweh] : [jachikasielu.uwakweh@upr.edu]
+# Author Info
+### [David Báez Bravo] : [davbaezbravo@outlook.com]
