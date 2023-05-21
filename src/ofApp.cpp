@@ -144,11 +144,12 @@ void ofApp::drawMode3(vector<float> amplitudes) {
     ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Curve Visualizer", 0, 15);
     ofSetColor(ofColor::orange);
-    float width_visual = ofGetWidth() / 64.0;
-    float position = 0.0; 
+    ofFill();
     for (float amp : amplitudes){
-        ofDrawCurve(position, 20*amp, 0, ofGetHeight()/2, ofGetWidth(), ofGetHeight()/2, position, -20*amp);
-        position += width_visual;
+        ofDrawCurve(ofGetWidth() / 2, ofGetHeight() / 2 - amp,                // Point 0
+                ofGetWidth() / 3,  ofGetHeight() / 2,          // Point 1
+                ofGetWidth() * 2 / 3, ofGetHeight() / 2,          // Point 2
+                ofGetWidth() / 2,  ofGetHeight() / 2);               // Point 3
     }
 }
 
