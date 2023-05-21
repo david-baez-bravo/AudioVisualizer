@@ -106,6 +106,7 @@ void ofApp::draw() {
     ofDrawBitmapString("[1] Mode 1", 450, ofGetHeight() - 90);
     ofDrawBitmapString("[2] Mode 2", 450, ofGetHeight() - 75);
     ofDrawBitmapString("[3] Mode 3", 450, ofGetHeight() - 60);
+    ofDrawBitmapString("[4] Mode 4", 450, ofGetHeight() - 45);
     ofDrawBitmapString("Volume: " + to_string(sound.getVolume()) + "%", 700, ofGetHeight() - 90);
     ofDrawBitmapString("Bands: " + to_string(visualizer.getBands()), 700, ofGetHeight() - 75);
 
@@ -144,11 +145,10 @@ void ofApp::drawMode3(vector<float> amplitudes) {
     ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Curve Visualizer", 0, 15);
     ofSetColor(ofColor::orange);
-    ofFill();
     for (float amp : amplitudes){
-        ofDrawCurve(ofGetWidth() / 2, ofGetHeight() / 2 - amp,                // Point 0
-                ofGetWidth() / 3,  ofGetHeight() / 2,          // Point 1
-                ofGetWidth() * 2 / 3, ofGetHeight() / 2,          // Point 2
+        ofDrawCurve(ofGetWidth() / 2, ofGetHeight() / 2 - amp * 5,                // Point 0
+                0,  ofGetHeight() / 2,          // Point 1
+                ofGetWidth(), ofGetHeight() / 2,          // Point 2
                 ofGetWidth() / 2,  ofGetHeight() / 2);               // Point 3
     }
 }
@@ -157,12 +157,11 @@ void ofApp::drawMode4(vector<float> amplitudes) {
     ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Elipse Visualizer/Cool Visualizer", 0, 15);
     ofSetColor(ofColor::lightGreen);
-    float width_visual = ofGetWidth() / 64.0;
+    float width_visual = ofGetWidth() / amplitudes.size();
     float position = 0.0; 
     for (float amp : amplitudes){
         ofDrawEllipse(ofGetWidth() / 2, ofGetHeight() / 2, position, amp);
         position += width_visual;
-
     }
 }
 
