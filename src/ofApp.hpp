@@ -15,8 +15,8 @@ class ofApp : public ofBaseApp {
     bool loop = false;
     bool repeat = true;
     bool shuffle = false;
-    char mode = '1';
-    int song_index=0;
+    char mode = '1'; 
+    int song_index= 0 ;
     
 
     

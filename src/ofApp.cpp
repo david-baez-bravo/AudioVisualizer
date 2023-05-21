@@ -11,9 +11,9 @@ void ofApp::setup() {
 void ofApp::update() {
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
-    ofSoundUpdate();               // Updates all sound players
+    ofSoundUpdate();                    // Updates all sound players
     if (!paused) {
-        visualizer.updateAmplitudes(); // Updates Amplitudes for visualizer
+        visualizer.updateAmplitudes();  // Updates Amplitudes for visualizer
     }
     progress = sound.getPosition();
 
@@ -48,11 +48,10 @@ void ofApp::draw() {
     // Progress Bar
     ofSetColor(256);
     ofFill();
-
     float pos = playing ? progress : lastPos;
     int percent = pos * 100;
     ofDrawBitmapString("Song Progress: " + ofToString(percent) + "%", 0, 30);
-    ofDrawRectangle(0,45,ofGetWidth()*pos,25); // progress bar
+    ofDrawRectangle(0,45,ofGetWidth()*pos,25); 
 
     // Mode Selection
     if (!playing) {
@@ -61,16 +60,16 @@ void ofApp::draw() {
     vector<float> amplitudes = visualizer.getAmplitudes();
     if (mode == '1') {
         drawMode1(amplitudes);
-        ofSetBackgroundColor(16, 50, 26); // Sets the Background Color
+        ofSetBackgroundColor(ofColor::darkGreen); // Sets the Background Color
     } else if (mode == '2') {
         drawMode2(amplitudes);
-        ofSetBackgroundColor(36, 32, 56); // Sets the Background Color
+        ofSetBackgroundColor(ofColor::darkSlateBlue); // Sets the Background Color
     } else if (mode == '3') {
         drawMode3(amplitudes);
-        ofSetBackgroundColor(70, 22, 56); // Sets the Background Color
+        ofSetBackgroundColor(ofColor::darkMagenta); // Sets the Background Color
     } else if (mode == '4') {
         drawMode4(amplitudes);
-        ofSetBackgroundColor(170, 172, 0); // Sets the Background Color
+        ofSetBackgroundColor(ofColor::darkRed); // Sets the Background Color
     }
 
     // adds visuals for modes
@@ -108,7 +107,7 @@ void ofApp::draw() {
     ofDrawBitmapString("Volume" + to_string(sound.getVolume()) + "%", 700, ofGetHeight() - 90);
 
 
-    // ofDrawBitmapString("Current Mouse Position: " + ofToString(cur_x) + ", " + ofToString(cur_y), 0, 30);
+    // ofDrawBitmapString("Current Mouse Position: " + ofToString(cur_x) + ", " + ofToString(cur_y), 0, 30);    //used for debugging
 }
 void ofApp::drawMode1(vector<float> amplitudes) {
     ofFill();        // Drawn Shapes will be filled in with color
@@ -116,10 +115,10 @@ void ofApp::drawMode1(vector<float> amplitudes) {
     ofDrawBitmapString("Rectangle Height Visualizer", 0, 15);
     ofSetColor(0, 0, ofRandom(256));
     float width_visual = ofGetWidth() / 64.0;
-    float position = 0.0; 
+    float rectPosition = 0.0; 
     for (float amp : amplitudes){
-        ofDrawRectRounded(position,ofGetHeight()-100, width_visual, amp, 10);
-        position += width_visual;
+        ofDrawRectRounded(rectPosition,ofGetHeight()-100, width_visual, amp, 10);
+        rectPosition += width_visual;
 
     }
 }
@@ -136,22 +135,21 @@ void ofApp::drawMode2(vector<float> amplitudes) {
 }
 
 void ofApp::drawMode3(vector<float> amplitudes) {
-    ofSetColor(255,95,0); // This resets the color of the "brush" to white
+    ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Curve Visualizer", 0, 15);
-    // YOUR CODE HERE
+    ofSetColor(ofColor::orange);
     float width_visual = ofGetWidth() / 64.0;
     float position = 0.0; 
     for (float amp : amplitudes){
         ofDrawCurve(position, 20*amp, 0, ofGetHeight()/2, ofGetWidth(), ofGetHeight()/2, position, -20*amp);
         position += width_visual;
-
     }
 }
 
 void ofApp::drawMode4(vector<float> amplitudes) {
-    ofSetColor(0,195,0); // This resets the color of the "brush" to white
+    ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Elipse Visualizer/Cool Visualizer", 0, 15);
-    // YOUR CODE HERE
+    ofSetColor(ofColor::lightGreen);
     float width_visual = ofGetWidth() / 64.0;
     float position = 0.0; 
     for (float amp : amplitudes){
@@ -219,7 +217,7 @@ void ofApp::keyPressed(int key) {
         sound.setVolume(min(sound.getVolume()+0.1,1.0));
         break;
     case '-':
-       sound.setVolume(max(sound.getVolume()-0.1,0.0));
+        sound.setVolume(max(sound.getVolume()-0.1,0.0));
         break;
     case '1':
         mode = '1';
@@ -248,7 +246,7 @@ void ofApp::mouseMoved(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-    // if moused dragged and clicked at the progress bar then it will alter the progress
+    // if moused clicked and dragged at the progress bar then it will alter the progress
     if ((y <= 70) && (y >= 45)) {
         float newProgress = ofMap(x, 0, ofGetWidth(), 0, 1);
         sound.setPosition(newProgress);
