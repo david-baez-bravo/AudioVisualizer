@@ -59,7 +59,6 @@ void ofApp::draw() {
     }
     vector<float> amplitudes = visualizer.getAmplitudes();
     if (mode == '1') {
-        visualizer.setBands(256);
         drawMode1(amplitudes);
         ofSetBackgroundColor(ofColor::darkGreen); // Sets the Background Color
     } else if (mode == '2') {
@@ -100,12 +99,15 @@ void ofApp::draw() {
     ofDrawBitmapString("[#] Song 3", 150, ofGetHeight() - 60);
     ofDrawBitmapString("[$] Song 4", 150, ofGetHeight() - 45);
     ofDrawBitmapString("[%] Song 5", 150, ofGetHeight() - 30);
-    ofDrawBitmapString("[-] Volume Down", 300, ofGetHeight() - 90);
-    ofDrawBitmapString("[=] Volume Up", 300, ofGetHeight() - 75);
+    ofDrawBitmapString("[=] Volume Up", 300, ofGetHeight() - 90);
+    ofDrawBitmapString("[-] Volume Down", 300, ofGetHeight() - 75);
+    ofDrawBitmapString("[n] Bands Up", 300, ofGetHeight() - 60);
+    ofDrawBitmapString("[m] Bands Down", 300, ofGetHeight() - 45);
     ofDrawBitmapString("[1] Mode 1", 450, ofGetHeight() - 90);
     ofDrawBitmapString("[2] Mode 2", 450, ofGetHeight() - 75);
     ofDrawBitmapString("[3] Mode 3", 450, ofGetHeight() - 60);
-    ofDrawBitmapString("Volume" + to_string(sound.getVolume()) + "%", 700, ofGetHeight() - 90);
+    ofDrawBitmapString("Volume: " + to_string(sound.getVolume()) + "%", 700, ofGetHeight() - 90);
+    ofDrawBitmapString("Bands: " + to_string(visualizer.getBands()), 700, ofGetHeight() - 75);
 
 
     // ofDrawBitmapString("Current Mouse Position: " + ofToString(cur_x) + ", " + ofToString(cur_y), 0, 30);    //used for debugging
@@ -130,9 +132,11 @@ void ofApp::drawMode2(vector<float> amplitudes) {
     ofSetColor(256);   // This resets the color of the "brush" to white
     ofDrawBitmapString("Circle Radius Visualizer", 0, 15);
     int bands = amplitudes.size();
-    for (int i = 0; i < bands; i++) {
+    int i = 0;
+    for (float amp : amplitudes) {
         ofSetColor((bands - i) * 32 % 256, 18, 144); // Color varies between frequencies
-        ofDrawCircle(ofGetWidth() / 2, ofGetHeight() / 2, amplitudes[0] / (i + 1));
+        ofDrawCircle(ofGetWidth() / 2, ofGetHeight() / 2, amp / (i + 1));
+        i++;
     }
 }
 
@@ -220,6 +224,12 @@ void ofApp::keyPressed(int key) {
         break;
     case '-':
         sound.setVolume(max(sound.getVolume()-0.1,0.0));
+        break;
+    case 'n':
+        visualizer.setBands(visualizer.getBands() * 2);
+        break;
+    case 'm':
+        visualizer.setBands(visualizer.getBands() / 2);
         break;
     case '1':
         mode = '1';
