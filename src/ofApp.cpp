@@ -59,6 +59,7 @@ void ofApp::draw() {
     }
     vector<float> amplitudes = visualizer.getAmplitudes();
     if (mode == '1') {
+        visualizer.setBands(256);
         drawMode1(amplitudes);
         ofSetBackgroundColor(ofColor::darkGreen); // Sets the Background Color
     } else if (mode == '2') {
@@ -113,15 +114,16 @@ void ofApp::drawMode1(vector<float> amplitudes) {
     ofFill();        // Drawn Shapes will be filled in with color
     ofSetColor(256); // This resets the color of the "brush" to white
     ofDrawBitmapString("Rectangle Height Visualizer", 0, 15);
-    ofSetColor(0, 0, ofRandom(256));
-    float width_visual = ofGetWidth() / 64.0;
+    ofSetColor(ofColor::blueSteel);
+    float width_visual = ofGetWidth() / amplitudes.size();
     float rectPosition = 0.0; 
     for (float amp : amplitudes){
-        ofDrawRectRounded(rectPosition,ofGetHeight()-100, width_visual, amp, 10);
+        ofDrawRectRounded(rectPosition,ofGetHeight()-125, width_visual, amp - 10, 10);
         rectPosition += width_visual;
 
     }
 }
+
 void ofApp::drawMode2(vector<float> amplitudes) {
     ofSetLineWidth(5); // Sets the line width
     ofNoFill();        // Only the outline of shapes will be drawn
